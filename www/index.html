@@ -39,26 +39,31 @@
     -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
-    <!-- <link rel="stylesheet" type="text/css" href="css/index.css" /> -->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/tachyons.css" />
-    <link rel="stylesheet" type="text/css" href="css/_font-family.css" />
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
 
     <title>Hello World</title>
 </head>
 
-<body class="helvetica">
-    <!-- <div class="h3 static">
-            <h2 class="ma0 pa3 white">PhoneGap</h2>
-    </div> -->
-    <header class="bg-dark-blue fixed w-100 ph3 pv3 pv4-ns ph4-m ph5-l">
-        <nav class="f6 fw6 ttu tracked">
-            <a class="link dim white dib mr3" href="#" title="Home">test</a>
-            <a class="link dim white dib mr3" href="#" title="About">About</a>
-            <a class="link dim white dib mr3" href="#" title="Store">Store</a>
-            <a class="link dim white dib" href="#" title="Contact">Contact</a>
-        </nav>
-    </header>
+<body>
+    <div class="row">
+            
+    <ul id="tabs-swipe-demo" class="tabs">
+        <li class="tab col s3"><a href="#test-swipe-1">Test 1</a></li>
+        <li class="tab col s3"><a class="active" href="#test-swipe-2">Test 2</a></li>
+        <li class="tab col s3"><a href="#test-swipe-3">Test 3</a></li>
+      </ul>
+      <div id="test-swipe-1" class="col s12 blue">Test 1</div>
+      <div id="test-swipe-2" class="col s12 red">Test 2</div>
+      <div id="test-swipe-3" class="col s12 green">Test 3</div>
+            
+    </div>
     <div class="bg-dark-blue pt5 flex flex-column" style="min-height:100vh;">
         <div class="bg-white  br--top br4 shadow-1 h-100 pt3" style="flex-grow: 1;">
             <div class="p2" id="geolocation">
@@ -79,13 +84,19 @@
     </div>
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript" src="js/geolocation.js"></script>
     <script type="text/javascript" src="js/api.js"></script>
 
     <script type="text/javascript">
+        var el = document.getElementsByClassName("tabs")[0];
+        console.log("el: ", el)
+        var instance = M.Tabs.init(el, {swipeable:true});
         app.initialize();
         geo.initialize();
         geo.setApi(api);
+        
+
     </script>
 </body>
 

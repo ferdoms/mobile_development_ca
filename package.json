@@ -27,11 +27,14 @@
       "cordova-plugin-vibration": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   },
   "dependencies": {
     "cordova-android": "8.1.0",
+    "cordova-browser": "^6.0.0",
+    "phonegap": "^9.0.0",
     "web": "0.0.2"
   }
 }
