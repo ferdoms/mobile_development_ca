@@ -1,8 +1,8 @@
 var geo = {
     apiUrl: `https://api.opencagedata.com/geocode/v1/json?`,
     api: undefined,
-    pos: undefined,
     apiKey: "69ae4737763149a18be447eb47817ad8",
+    device: undefined,
     // Application Constructor
     initialize: function () {
         this.bindEvents();
@@ -16,16 +16,43 @@ var geo = {
     },
 
     onDeviceReady: function () {
+        (async () => {
+            var l = await geo.getLocationData();
+            var { country_code, country, city } = l.components
+            var element = document.getElementById('geolocation');
+            console.log(l)
+            element.innerHTML = `
+                <img class="" src="https://www.countryflags.io/${country_code}/shiny/64.png"> 
+                <p>${city}, ${country}</p>
+                <div class="pa4 tc">
+  <img
+      src="https://www.countryflags.io/${country_code}/shiny/64.png"
+      class="h3 w3 dib" alt="flag">
+      <p class="ma0">${city}, ${country}</p>
+</div>
+            `
+        })();
 
     },
     setApi: function (api) {
         this.api = api;
     },
-    getLocation: function () {
+    getLocationData: function () {
         return (async () => {
-            let pos = await getPosition();
-            let lat = pos.coords.latitude
-            let long = pos.coords.longitude
+            let pos, lat, long = undefined;
+            if (device.platform !== "browser") {
+                pos = await getPosition();
+            } else {
+                //set default Location if in browser (Dublin)
+                pos = {
+                    coords: {
+                        latitude: 53.349804,
+                        longitude: -6.260310
+                    }
+                }
+            }
+            lat = pos.coords.latitude
+            long = pos.coords.longitude
             if (!this.api || !pos || !this.apiKey) {
                 alert("Couldn't fetch location")
                 console.log(`Api: ${!!this.api} \n`,
@@ -33,11 +60,14 @@ var geo = {
                     `ApiKey: ${this.apiKey}\n`);
                 return undefined;
             }
-            let data = await this.api.fetchData(this.apiUrl + `q=${lat}+${long}&key=${this.apiKey}`)
-            
-            return data.results[0].components;
+            let url = this.apiUrl + `q=${lat}+${long}&key=${this.apiKey}`;
+            console.log(url);
+            let data = await this.api.fetchData(url)
+
+            return data.results[0];
         })()
     },
+
 }
 
 function getPosition() {
@@ -59,8 +89,9 @@ function onSuccess(position) {
         'Speed: ' + position.coords.speed + '<br />' +
         'Timestamp: ' + position.timestamp + '<br />';
 }
-function onError() {
-    console.log("err");
+function onError(error) {
     alert('code: ' + error.code + '\n' +
-        'message: ' + error.message + '\n');
+        ' message: ' + error.message + '\n');
+
+    throw Error("Couldn't retrieve location")
 }

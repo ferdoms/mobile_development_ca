@@ -61,7 +61,10 @@
     </header>
     <div class="bg-dark-blue pt5 flex flex-column" style="min-height:100vh;">
         <div class="bg-white  br--top br4 shadow-1 h-100 pt3" style="flex-grow: 1;">
-            <p id="geolocation">Finding geolocation...</p>
+            <div class="p2" id="geolocation">
+                <p>Finding geolocation...</p>
+            </div>
+
         </div>
     </div>
 
@@ -83,14 +86,6 @@
         app.initialize();
         geo.initialize();
         geo.setApi(api);
-        (async () => {
-            var l = await geo.getLocation();
-            var element = document.getElementById('geolocation');
-            console.log(l)
-            element.innerHTML = l.city + ", " + l.country;
-
-        })();
-
     </script>
 </body>
 
