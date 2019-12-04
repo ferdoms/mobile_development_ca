@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<!--
+<html>
+  <!--
     Copyright (c) 2012-2016 Adobe Systems Incorporated. All rights reserved.
 
     Licensed to the Apache Software Foundation (ASF) under one
@@ -20,15 +21,19 @@
     under the License.
 -->
 
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
-    <meta name="viewport"
-        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta
+      name="viewport"
+      content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"
+    />
     <!-- This is a wide open CSP declaration. To lock this down for production, see below. -->
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src * 'unsafe-inline' gap:; style-src 'self' 'unsafe-inline'; media-src *"
+    />
     <!-- Good default declaration:
     * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
     * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
@@ -40,49 +45,78 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
     <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <!--Import materialize.css-->
-    
+
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/tachyons.css" />
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="css/materialize.min.css"
+      media="screen,projection"
+    />
 
     <title>Hello World</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="row">
-        
-    <nav class="nav-extended">
+    <!-- ----------------------Header------------------ -->
+      <nav class="nav-extended">
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo">InfoApp</a>
+          <a href="#" class="brand-logo">InfoApp</a>
         </div>
-    </nav>
-    <ul id="tabs-swipe-demo" class="tabs">
+      </nav>
+      <ul id="tabs-swipe-demo" class="tabs">
         <li class="tab col s3"><a href="#test-swipe-1">Currency</a></li>
-        <li class="tab col s3"><a class="active" href="#test-swipe-2">Info</a></li>
+        <li class="tab col s3">
+          <a class="active" href="#test-swipe-2">Info</a>
+        </li>
         <li class="tab col s3"><a href="#test-swipe-3">Weather</a></li>
       </ul>
-      
+      <!-- ----------------------Currency------------------ -->
       <div id="test-swipe-1" class="col s12 white">
-          
-      </div>
-      <div id="test-swipe-2" class="flex flex-row items-center justify-center white" style="display: flex;">
-            <div class="pa4 flex" id="geolocation">
-                <p>Finding geolocation...</p>
-                <div class="progress">
-                    <div class="indeterminate"></div>
-                </div>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s6">
+                <input
+                  placeholder="Placeholder"
+                  id="first_name"
+                  type="text"
+                  class="validate"
+                />
+                <label for="first_name">First Name</label>
+              </div>
+              <div class="input-field col s6">
+                <input id="last_name" type="text" class="validate" />
+                <label for="last_name">Last Name</label>
+              </div>
             </div>
-    </div>
-      <div id="test-swipe-3" class="col s12 white">
-          
+          </form>
+        </div>
       </div>
-            
+      <!-- ----------------------INFO------------------ -->
+      <div
+        id="test-swipe-2"
+        class="flex flex-row items-center justify-center white"
+        style="display: flex;"
+      >
+        <div class="pa4 flex" id="geolocation">
+          <p>Finding geolocation...</p>
+          <div class="progress">
+            <div class="indeterminate"></div>
+          </div>
+        </div>
+      </div>
+      <!-- ----------------------Weather------------------ -->
+      <div id="test-swipe-3" class="col s12 white"></div>
     </div>
-    
-    
+
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -90,15 +124,12 @@
     <script type="text/javascript" src="js/api.js"></script>
 
     <script type="text/javascript">
-        var el = document.getElementsByClassName("tabs")[0];
-        console.log("el: ", el)
-        var instance = M.Tabs.init(el, {swipeable:true});
-        app.initialize();
-        geo.initialize();
-        geo.setApi(api);
-        
-
+      var el = document.getElementsByClassName("tabs")[0];
+      console.log("el: ", el);
+      var instance = M.Tabs.init(el, { swipeable: true });
+      app.initialize();
+      geo.initialize();
+      geo.setApi(api);
     </script>
-</body>
-
+  </body>
 </html>
